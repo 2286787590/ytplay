@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-16天气查询-axios+vue结合实现</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入网站favicon图标 -->
+    <link rel="shortcut icon" href="1-16favicon.ico" type="image/x-icon">
+    <!-- 引入vue包 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入axios包 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        input {
+            outline: none;
+        }
+        
+        #box {
+            width: 800px;
+            height: 400px;
+            margin: 100px auto;
+        }
+        
+        .logo {
+            width: 160px;
+            margin: 0 auto;
+        }
+        
+        .nav {
+            width: 640px;
+            height: 40px;
+            margin: 40px auto 80px;
+        }
+        
+        .nav .hd input:first-child {
+            float: left;
+            width: 540px;
+            height: 40px;
+            border: 1px solid #41a1cb;
+            padding-left: 15px;
+        }
+        
+        .nav .hd input:last-child {
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #41a1cb;
+            border: 0px;
+            font-size: 16px;
+            color: #fff;
+        }
+        
+        .nav .bd {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .bd span {
+            margin-right: 15px;
+        }
+        
+        .weather_list li {
+            float: left;
+            width: 160px;
+            height: 200px;
+            background: url(images/1-16line.png) right center no-repeat;
+            padding: 0 10px;
+            background-size: 1px 130px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .weather_list li:last-child {
+            background: #ffffff;
+        }
+        
+        .info_type {
+            height: 40px;
+            margin-top: 20px;
+            font-size: 30px;
+            color: #fda257;
+        }
+        
+        .info_temp {
+            margin: 25px 0;
+            font-size: 14px;
+            color: #fda257;
+        }
+        
+        .info_date {
+            color: #999999;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- logo -->
+        <div class="logo" title="天知道">
+            <img src="images/1-16logo.png" alt=""></div>
+        <!-- 搜索框 -->
+        <div class="nav">
+            <div class="hd">
+                <input type="text" placeholder="请输入查询天气的地区" v-model="city" @keyup.enter="getWeather">
+                <input type="button" value="搜索" @click="getWeather">
+            </div>
+            <!-- 快速搜索地点 -->
+            <div class="bd">
+                <span @click="searchWeather('北京')">北京</span>
+                <span @click="searchWeather('上海')">上海</span>
+                <span @click="searchWeather('广州')">广州</span>
+                <span @click="searchWeather('深圳')">深圳</span>
+            </div>
+        </div>
+        <!-- 天气详情 -->
+        <div class="main">
+            <ul class="weather_list">
+                <li v-for="item in weatherList">
+                    <!-- v-for="(item,index) in weatherList" -->
+                    <div class="info_type"> <span>{{item.type}}</span></div>
+                    <div class="info_temp"> <span>{{item.low}}~{{item.high}}</span></div>
+                    <div class="info_date"> <span>{{item.date}}</span></div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#box",
+            data: {
+                city: "",
+                weatherList: [],
+            },
+            methods: {
+                getWeather: function() {
+                    var that = this;
+                    axios.get(" http://wthrcdn.etouch.cn/weather_mini?city=" + this.city).then(function(response) {
+                            console.log(response.data.data.forecast);
+                            that.weatherList = response.data.data.forecast;
+                        },
+                        function(err) {})
+                },
+                searchWeather: function(city) {
+                    this.city = city;
+                    this.getWeather();
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

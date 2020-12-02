@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悦听-一个可以播放音乐的网站</title>
+    <!-- 引入网站favicon图标 -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- 引入初始化样式 -->
+    <link rel="stylesheet" href="./css/base.css">
+    <!-- 引入首页样式 -->
+    <link rel="stylesheet" href="css/index.css">
+    <!-- 引入vue包 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 引入axios包 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 第一部分 导航栏start -->
+        <div class="header">
+            <h2>悦听</h2>
+            <!-- 搜索框 -->
+            <input type="text" @keyup.enter="getMusic" v-model="content" placeholder="请输入关键字">
+            <button @click="getMusic"></button>
+        </div>
+        <!-- 第一部分 导航栏end -->
+        <!-- 第二部分主体内容start -->
+        <div class="main">
+            <!-- 左侧歌曲列表 -->
+            <div class="left">
+                <ul>
+                    <!-- 渲染歌曲 -->
+                    <li v-for="item in musicList">
+                        <!-- 传递歌曲id进函数 调用axios接口查询当前歌曲id的url地址 -->
+                        <button @click="playMusic(item.id)"> </button>
+                        <!-- 打印歌曲名称 -->
+                        <span @dblclick="playMusic(item.id)">{{item.name}}</span>
+                        <!-- 传递歌曲mvid进函数 调用axios接口查询当前歌曲mvid的url地址 -->
+                        <span v-if="item.mvid!=0" class="mv" @click="getMvUrl(item.mvid)"></span>
+                    </li>
+                </ul>
+            </div>
+            <!-- 中间封面部分 -->
+            <div class="center" :class="{playing:isPlaying}">
+                <!-- 播放控件 -->
+                <img src="./images/player_bar.png" alt="" class="play_bar">
+                <!-- 胶片 -->
+                <img src="./images/disc.png" alt="" class="disc autoRotate">
+                <!-- 歌曲封面 -->
+                <img :src="picUrl" alt="" class="cover autoRotate">
+            </div>
+            <!-- 右侧热门留言 -->
+            <div class="right">
+                <h4>热门留言</h4>
+                <ul>
+                    <!-- 渲染留言 -->
+                    <li class="clearfix" v-for="hot in hotComments">
+                        <!-- 添加用户头像 -->
+                        <img :src="hot.user.avatarUrl" alt="">
+                        <h4>{{hot.user.nickname}}</h4>
+                        <p>{{hot.content}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 第二部分主体内容 end -->
+        <!-- 第三部分播放条start -->
+        <div class="footer">
+            <!-- 音乐播放控件 -->
+            <div class="playMusic">
+                <audio :src="musicUrl" @play="play" @pause="pause" controls="controls" autoplay="autoplay" loop="loop">
+                </audio>
+            </div>
+            <!-- 视频播放控件 -->
+            <div class="video-con" v-show="isShow">
+                <video :src="mvUrl" controls="controls" autoplay="autoplay"></video>
+                <!-- controls="controls" 显示控件   autoplay="autoplay"自动播放  loop="loop"循环播放-->
+                <div class="mask" @click="hide"></div>
+            </div>
+        </div>
+        <!-- 第三部分播放条end -->
+    </div>
+    <script src="js/index.js"></script>
+</body>
+
+
+</html>

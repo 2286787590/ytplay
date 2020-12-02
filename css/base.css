@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot?qz0boj');
+    src: url('../fonts/icomoon.eot?qz0boj#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?qz0boj') format('truetype'), url('../fonts/icomoon.woff?qz0boj') format('woff'), url('../fonts/icomoon.svg?qz0boj#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+img {
+    /* 可以清除底下白色部分 */
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+input {
+    outline: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}

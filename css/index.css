@@ -1,0 +1,283 @@
+            body {
+                background: url(..//images/bg.jpg);
+            }
+            
+            #app {
+                width: 800px;
+                height: 545px;
+                margin: 186px auto;
+            }
+            /* 头部盒子 */
+            
+            .header {
+                position: relative;
+                width: 800px;
+                height: 60px;
+                padding: 0 20px;
+                background: #1eacda;
+                border-radius: 5px 5px 0 0;
+            }
+            
+            .header h2 {
+                float: left;
+                line-height: 60px;
+                font-weight: 400;
+                color: #ffffff;
+            }
+            
+            .header input {
+                float: right;
+                width: 300px;
+                height: 36px;
+                margin-top: 12px;
+                padding: 0 15px;
+                border: none;
+                background: #83d1eb;
+                border-radius: 18px;
+            }
+            
+            .header button {
+                position: absolute;
+                right: 40px;
+                top: 20px;
+                width: 20px;
+                height: 20px;
+                border: none;
+                background: url(../images/zoom.png);
+                outline: none;
+            }
+            /* 主体 */
+            
+            .main {
+                height: 435px;
+                background: url(../images/sbg.png)repeat-x;
+            }
+            
+            .left,
+            .center,
+            .right {
+                float: left;
+                width: 200px;
+                height: 435px;
+            }
+            /* 左边歌曲列表 */
+            
+            .left {
+                position: relative;
+                padding: 10px;
+                /* 2.这个把溢出的部分隐藏起来 */
+                overflow: hidden;
+                background: url(../images/line.png)no-repeat 199px;
+            }
+            
+            .left ul {
+                position: absolute;
+                height: 435px;
+                overflow: auto;
+            }
+            
+            .left li {
+                position: relative;
+                width: 180px;
+                height: 40px;
+                line-height: 40px;
+                padding: 0 35px 0 30px;
+                margin-right: 10px;
+                font-size: 14px;
+                /* 1.这个文字显示不开也必须在一行内显示 */
+                white-space: nowrap;
+                /* 2.这个把溢出的部分隐藏起来 */
+                overflow: hidden;
+                /* 3.这个部分把溢出的用省略号表示 */
+                text-overflow: ellipsis;
+            }
+            
+            .left li:nth-child(odd) {
+                background: #e9dac4;
+            }
+            
+            .left li button,
+            .left li .mv {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                width: 20px;
+                height: 20px;
+                background: url(../images/table.png) -20px -24px;
+                border: none;
+                outline: none;
+            }
+            
+            .left li .mv {
+                display: block;
+                left: 158px;
+                background-position: -31px -44px;
+            }
+            /* 中间播放部件部分 */
+            
+            .center {
+                width: 400px;
+                height: 435px;
+                position: relative;
+            }
+            
+            .play_bar {
+                position: absolute;
+                top: 0px;
+                left: 200px;
+                z-index: 3;
+                /* 渲染 做旋转 */
+                transform: rotate(-40deg);
+                /* 改变位置 */
+                transform-origin: 12px 12px;
+                /* 过度动画  过度时间 */
+                transition: 1s;
+            }
+            
+            .disc {
+                position: relative;
+                margin: 60px auto 120px auto;
+                z-index: 2;
+            }
+            
+            .cover {
+                position: absolute;
+                top: 115px;
+                left: 125px;
+                width: 150px;
+                height: 150px;
+            }
+            /* 右侧热门留言 */
+            
+            .right {
+                position: relative;
+                padding: 10px;
+                background: url(../images/line.png) no-repeat left;
+                overflow: hidden;
+            }
+            
+            .right h4 {
+                font-size: 14px;
+            }
+            
+            .right ul {
+                position: absolute;
+                margin-top: 7px;
+                height: 399px;
+                overflow: auto;
+            }
+            
+            .right ul li {
+                width: 200px;
+                margin-bottom: 30px;
+            }
+            
+            .right ul li img {
+                float: left;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+            
+            .right ul li h4 {
+                float: left;
+                height: 15px;
+                width: 140px;
+                line-height: 15px;
+                padding-left: 10px;
+                /* 1.这个文字显示不开也必须在一行内显示 */
+                white-space: nowrap;
+                /* 2.这个把溢出的部分隐藏起来 */
+                overflow: hidden;
+                /* 3.这个部分把溢出的用省略号表示 */
+                text-overflow: ellipsis;
+            }
+            
+            .right ul li p {
+                float: left;
+                width: 140px;
+                padding: 0px 5px 0 10px;
+                line-height: 18px;
+                font-size: 12px;
+                color: #6b6666;
+            }
+            /*底端播放按钮 */
+            
+            .footer {
+                height: 50px;
+                line-height: 50px;
+                background: #f1f3f4;
+            }
+            
+            .footer div {
+                float: left;
+            }
+            
+            .playMusic {
+                font-size: 18px;
+                margin: 0 10px 0 20px;
+            }
+            
+            .playMusic audio {
+                outline: none;
+                height: 50px;
+                width: 750px;
+            }
+            /* 旋转的动画 */
+            
+            @keyframes Rotate {
+                from {
+                    /* 动画开始状态 */
+                    transform: rotateZ(0);
+                }
+                to {
+                    /* 动画结束状态 360度 */
+                    transform: rotateZ(360deg);
+                }
+            }
+            /* 旋转的类名 */
+            
+            .autoRotate {
+                /* 动画名 */
+                animation-name: Rotate;
+                /* 动画次数 无限次 infinite*/
+                animation-iteration-count: infinite;
+                animation-play-state: paused;
+                /* 速度 匀速linear */
+                animation-timing-function: linear;
+                /* 时间  5s */
+                animation-duration: 5s;
+            }
+            /* 是否正在播放 */
+            
+            .center.playing .disc,
+            .center.playing .cover {
+                animation-play-state: running;
+            }
+            /* 播放杆 转回去 */
+            
+            .center.playing .play_bar {
+                transform: rotate(0);
+            }
+            /*视频播放  */
+            
+            .video-con video {
+                position: fixed;
+                top: 186px;
+                left: 50%;
+                width: 800px;
+                height: 550px;
+                transform: translateX(-50%);
+                z-index: 10;
+            }
+            /* 遮罩层 */
+            
+            .mask {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, .6);
+                z-index: 5;
+            }
